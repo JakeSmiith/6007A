@@ -1,0 +1,37 @@
+# Define parameters
+risk_free_rate <- 0.05         # 5% risk-free interest rate
+market_return_up <- 0.4        # 40% market return (up)
+market_return_down <- -0.2     # -20% market return (down)
+prob_up <- 0.5                 # Probability of 40% return
+prob_down <- 0.5               # Probability of -20% return
+
+# Strategy 1: One year in risk-free, one year in market
+# Possible outcomes for Strategy 1 (1st year in risk-free, 2nd year in market)
+strategy1_returns <- c((1 + risk_free_rate) * (1 + market_return_up) - 1,
+                       (1 + risk_free_rate) * (1 + market_return_down) - 1)
+
+# Calculate expected payoff and standard deviation for Strategy 1
+expected_return_strategy1 <- mean(strategy1_returns)
+variance_strategy1 <- sum((strategy1_returns - expected_return_strategy1)^2 * c(prob_up, prob_down))
+std_dev_strategy1 <- sqrt(variance_strategy1)
+
+# Strategy 2: Two years in the market
+# Possible outcomes for Strategy 2
+strategy2_returns <- c((1 + market_return_up)^2 - 1,
+                       (1 + market_return_up) * (1 + market_return_down) - 1,
+                       (1 + market_return_down) * (1 + market_return_up) - 1,
+                       (1 + market_return_down)^2 - 1)
+
+# Calculate expected payoff and standard deviation for Strategy 2
+expected_return_strategy2 <- mean(strategy2_returns)
+variance_strategy2 <- sum((strategy2_returns - expected_return_strategy2)^2 * c(0.25, 0.25, 0.25, 0.25))
+std_dev_strategy2 <- sqrt(variance_strategy2)
+
+# Display results
+cat("Strategy 1: One Year in Risk-Free, One Year in Market\n")
+cat("Expected Final Payoff:", round(expected_return_strategy1 * 100, 2), "%\n")
+cat("Standard Deviation of Final Payoff:", round(std_dev_strategy1 * 100, 2), "%\n\n")
+
+cat("Strategy 2: Two Years in the Market\n")
+cat("Expected Final Payoff:", round(expected_return_strategy2 * 100, 2), "%\n")
+cat("Standard Deviation of Final Payoff:", round(std_dev_strategy2 * 100, 2), "%\n")
