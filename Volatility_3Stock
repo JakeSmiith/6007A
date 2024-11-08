@@ -1,0 +1,42 @@
+# Function to calculate portfolio volatility for a multi-stock portfolio
+# Inputs: volatilities, weights, and correlations (a list of correlation pairs)
+calculate_portfolio_volatility_multistock <- function(volatilities, weights, correlations) {
+  # Calculate number of stocks
+  n <- length(volatilities)
+  
+  # Initialize portfolio variance
+  portfolio_variance <- 0
+  
+  # Add the individual variance terms (weights^2 * volatilities^2)
+  for (i in 1:n) {
+    portfolio_variance <- portfolio_variance + (weights[i]^2 * volatilities[i]^2)
+  }
+  
+  # Add the covariance terms (2 * weights[i] * weights[j] * volatilities[i] * volatilities[j] * correlation[i, j])
+  k <- 1
+  for (i in 1:(n - 1)) {
+    for (j in (i + 1):n) {
+      portfolio_variance <- portfolio_variance + 
+                            2 * weights[i] * weights[j] * volatilities[i] * volatilities[j] * correlations[k]
+      k <- k + 1
+    }
+  }
+  
+  # Calculate portfolio volatility (standard deviation)
+  portfolio_volatility <- sqrt(portfolio_variance)
+  
+  # Return portfolio volatility
+  return(portfolio_volatility)
+}
+
+# Example Inputs
+volatilities <- c(0.5, 0.3, 0.4)         # Volatilities of each stock
+weights <- c(0.4, 0.3, 0.3)              # Weights of each stock (must sum to 1)
+
+# Correlations between each unique pair of stocks
+# For three stocks, we need three correlations: (1,2), (1,3), and (2,3)
+correlations <- c(0.2, -0.1, 0.3)        # Example correlations for pairs (1,2), (1,3), (2,3)
+
+# Calculate and print portfolio volatility
+portfolio_volatility <- calculate_portfolio_volatility_multistock(volatilities, weights, correlations)
+cat("Portfolio Volatility:", round(portfolio_volatility, 4), "\n")
