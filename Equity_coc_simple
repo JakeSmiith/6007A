@@ -1,0 +1,10 @@
+# Define the given values
+beta_pepsico <- 0.57            # Beta of PepsiCo
+risk_free_rate <- 0.03          # Risk-free rate (3%)
+market_return <- 0.08           # Expected return of the market (8%)
+
+# Calculate the equity cost of capital using CAPM
+equity_cost_of_capital <- risk_free_rate + beta_pepsico * (market_return - risk_free_rate)
+
+# Display the result
+cat("PepsiCo's Equity Cost of Capital:", round(equity_cost_of_capital * 100, 2), "%\n")
