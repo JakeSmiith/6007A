@@ -1,0 +1,26 @@
+# Function to calculate portfolio weights that remove all risk
+calculate_risk_free_weights <- function(volatility_A, volatility_B, correlation) {
+    # Check if correlation is -1 (required for risk-free portfolio)
+    if (correlation != -1) {
+        stop("Risk-free portfolio is only possible with a correlation of -1.")
+    }
+    
+    # Calculate weights to balance the risk and remove all variance
+    weight_A <- volatility_B / (volatility_A + volatility_B)
+    weight_B <- volatility_A / (volatility_A + volatility_B)
+    
+    # Output the weights
+    cat("Optimal Weights for Risk-Free Portfolio:\n")
+    cat("Asset A:", round(weight_A, 4), "\n")
+    cat("Asset B:", round(weight_B, 4), "\n")
+    
+    return(list(weight_A = weight_A, weight_B = weight_B))
+}
+
+# Input the volatilities and correlation
+volatility_A <- 0.5           # Example: 50% volatility for Asset A
+volatility_B <- 0.25          # Example: 25% volatility for Asset B
+correlation <- -1             # Perfect negative correlation required for zero-risk portfolio
+
+# Calculate and display the weights for a zero-risk portfolio
+risk_free_weights <- calculate_risk_free_weights(volatility_A, volatility_B, correlation)
