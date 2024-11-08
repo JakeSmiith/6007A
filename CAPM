@@ -1,0 +1,14 @@
+# Define inputs with "x" for each value
+x <- 0.04         # Risk-free rate (4%)
+beta <- 1.5       # Beta of the stock
+market_return_up <- 0.3  # Market return when it goes up (30%)
+market_return_down <- -0.1  # Market return when it goes down (-10%)
+
+# Calculate the expected market return (E[Rm])
+expected_market_return <- (0.5 * market_return_up) + (0.5 * market_return_down)
+
+# Calculate the expected return of the stock (E[R]) using CAPM formula
+expected_return <- x + beta * (expected_market_return - x)
+
+# Display the result
+cat("Expected Return of the Stock:", round(expected_return * 100, 2), "%\n")
