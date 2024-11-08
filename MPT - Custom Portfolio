@@ -1,0 +1,35 @@
+#Adjusting CML
+# Function to calculate portfolio characteristics
+theoretical_portfolio <- function(current_return, current_volatility, risk_free_rate, high_return, high_volatility) {
+  
+  # Part (a): Calculate weights for higher return with same volatility
+  weight_a <- current_volatility / high_volatility
+  expected_return_a <- risk_free_rate + weight_a * (high_return - risk_free_rate)
+  
+  # Part (b): Calculate weights for same return with lower volatility
+  weight_b <- (current_return - risk_free_rate) / (high_return - risk_free_rate)
+  volatility_b <- weight_b * high_volatility
+  
+  # Display results
+  cat("Results:\n\n")
+  
+  cat("Part (a): Higher Return with Same Volatility\n")
+  cat("Weight in High-Return Portfolio:", round(weight_a * 100, 2), "%\n")
+  cat("Weight in Risk-Free Asset:", round((1 - weight_a) * 100, 2), "%\n")
+  cat("Expected Return of Portfolio:", round(expected_return_a * 100, 2), "%\n\n")
+  
+  cat("Part (b): Lower Volatility with Same Expected Return\n")
+  cat("Weight in High-Return Portfolio:", round(weight_b * 100, 2), "%\n")
+  cat("Weight in Risk-Free Asset:", round((1 - weight_b) * 100, 2), "%\n")
+  cat("Volatility of Portfolio:", round(volatility_b * 100, 2), "%\n")
+}
+
+# Example inputs based on the question
+current_return <- 0.12       # 12% expected return for the current portfolio
+current_volatility <- 0.1   # 8% volatility for the current portfolio
+risk_free_rate <- 0.05       # 5% risk-free rate
+high_return <- 0.20          # 20% expected return for the high-return portfolio
+high_volatility <- 0.12      # 12% volatility for the high-return portfolio
+
+# Run the tool with example inputs
+theoretical_portfolio(current_return, current_volatility, risk_free_rate, high_return, high_volatility)
