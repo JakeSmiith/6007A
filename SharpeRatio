@@ -1,0 +1,16 @@
+# Define the risk-free rate
+risk_free_rate <- 0.04  # 4%
+
+# Create a data frame with the portfolio data
+portfolios <- data.frame(
+  "Expected Return" = c(0.10, 0.15, 0.06),  # Expected returns for Fund A, Fund B, Fund C
+  "Volatility" = c(0.10, 0.22, 0.02)        # Volatilities for Fund A, Fund B, Fund C
+)
+rownames(portfolios) <- c("Fund A", "Fund B", "Fund C")
+
+# Calculate Sharpe Ratio for each portfolio
+portfolios$Sharpe_Ratio <- (portfolios$Expected.Return - risk_free_rate) / portfolios$Volatility
+
+# Print the data frame with Expected Return, Volatility, and Sharpe Ratio
+cat("Portfolio Summary with Expected Returns, Volatilities, and Sharpe Ratios:\n\n")
+print(portfolios)
