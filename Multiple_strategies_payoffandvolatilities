@@ -1,3 +1,5 @@
+#Note - There are two ways to calculate expected value - Through mulitple data points (multiple stocks, time periods etc), or through Beta of a single stock
+
 # Define parameters
 risk_free_rate <- 0.05         # 5% risk-free interest rate
 market_return_up <- 0.4        # 40% market return (up)
