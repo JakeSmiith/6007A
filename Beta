@@ -1,0 +1,17 @@
+# Define changes in market returns
+market_up <- x       # Market increases by x%
+market_down <- x    # Market decreases by x%
+
+# Define changes in stock returns corresponding to market movements
+stock_up <- x       # Stock increases by x% when market goes up
+stock_down <- x    # Stock decreases by x% when market goes down
+
+# Calculate the difference in stock return and market return
+delta_stock <- stock_up - stock_down
+delta_market <- market_up - market_down
+
+# Calculate Beta
+beta <- delta_stock / delta_market
+
+# Display the result
+cat("Beta of the stock:", round(beta, 2), "\n")
