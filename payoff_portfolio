@@ -1,0 +1,33 @@
+# Define investment amounts (in dollars) using "x"
+x <- -35000000  # Investment amount for Oracle (short position)
+y <- 85000000   # Investment amount for Intel (long position)
+
+# Define expected returns using "x"
+expected_return_x <- 0.12  # Expected return for Oracle (12%)
+expected_return_y <- 0.145 # Expected return for Intel (14.5%)
+
+# Define standard deviations and correlation
+stdev_x <- 0.45            # Standard deviation for Oracle (45%)
+stdev_y <- 0.40            # Standard deviation for Intel (40%)
+correlation <- 0.65        # Correlation between Oracle and Intel returns
+
+# Calculate total investment
+total_investment <- x + y
+
+# Calculate portfolio expected return
+portfolio_expected_return <- (x / total_investment) * expected_return_x +
+                            (y / total_investment) * expected_return_y
+
+# Calculate weights for each asset in the portfolio
+weight_x <- x / total_investment
+weight_y <- y / total_investment
+
+# Calculate portfolio standard deviation
+portfolio_variance <- (weight_x^2 * stdev_x^2) +
+                      (weight_y^2 * stdev_y^2) +
+                      (2 * weight_x * weight_y * stdev_x * stdev_y * correlation)
+portfolio_stdev <- sqrt(portfolio_variance)
+
+# Display the results
+cat("Expected Return of the Hedge Fund's Portfolio:", round(portfolio_expected_return * 100, 2), "%\n")
+cat("Standard Deviation of the Hedge Fund's Portfolio:", round(portfolio_stdev * 100, 2), "%\n")
