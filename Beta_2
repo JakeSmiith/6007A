@@ -1,0 +1,14 @@
+# Define the given values
+correlation_with_market <- 0.06  # Correlation between MRK and the Market
+volatility_MRK <- 0.20           # Volatility of MRK (20%)
+volatility_market <- 0.16        # Volatility of the Market (16%)
+risk_free_rate <- 0.04           # Risk-free rate (4%)
+expected_market_return <- 0.10   # Expected return of the market (10%)
+
+# Calculate Beta
+beta_MRK <- correlation_with_market * volatility_MRK / volatility_market
+cat("Merck's Beta with respect to the market:", round(beta_MRK, 4), "\n")
+
+# Calculate Expected Return using CAPM
+expected_return_MRK <- risk_free_rate + beta_MRK * (expected_market_return - risk_free_rate)
+cat("Expected Return of Merck's stock under CAPM assumptions:", round(expected_return_MRK * 100, 2), "%\n")
