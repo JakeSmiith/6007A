@@ -1,0 +1,50 @@
+#R Portfolio optimisation
+# Load the required package
+if (!require(quadprog)) install.packages("quadprog")
+library(quadprog)
+
+# Function to calculate optimal weights given volatilities, correlation, and expected returns
+calculate_optimal_weights <- function(volatility_A, volatility_B, correlation, expected_return_A, expected_return_B) {
+    
+    # Define the covariance matrix based on volatilities and correlation
+    cov_matrix <- matrix(c(volatility_A^2, volatility_A * volatility_B * correlation,
+                           volatility_A * volatility_B * correlation, volatility_B^2), nrow = 2)
+    
+    # Add a small jitter to the diagonal to ensure positive definiteness
+    cov_matrix <- cov_matrix + diag(1e-6, nrow(cov_matrix))
+    
+    # Define the expected returns vector
+    expected_returns <- c(expected_return_A, expected_return_B)
+    
+    # Define parameters for the quadprog function
+    Dmat <- cov_matrix                    # Covariance matrix
+    dvec <- expected_returns              # Linear term (maximize expected return)
+    Amat <- cbind(1, diag(2))             # Constraints matrix (sum of weights = 1 and non-negative weights)
+    bvec <- c(1, 0, 0)                    # Constraints values (sum of weights = 1, weights >= 0)
+    meq <- 1                              # Number of equality constraints (sum of weights = 1)
+    
+    # Solve the quadratic program
+    result <- solve.QP(Dmat, dvec, Amat, bvec, meq)
+    optimal_weights <- result$solution
+    
+    # Calculate the expected return of the optimal portfolio
+    portfolio_return <- sum(optimal_weights * expected_returns)
+    
+    # Display the optimal weights and expected return
+    cat("Optimal Weights:\n")
+    cat("Asset A:", round(optimal_weights[1], 4), "\n")
+    cat("Asset B:", round(optimal_weights[2], 4), "\n")
+    cat("Expected Return of Portfolio:", round(portfolio_return, 4), "\n")
+    
+    return(list(weights = optimal_weights, expected_return = portfolio_return))
+}
+
+# Input the volatilities, correlation, and expected returns
+volatility_A <- 0.5           # Example: 50% volatility for Asset A
+volatility_B <- 0.25          # Example: 25% volatility for Asset B
+correlation <- -0.99999          # Use a correlation slightly less than 1 to avoid non-positive definiteness
+expected_return_A <- 0.26      # Example: 26% expected return for Asset A
+expected_return_B <- 0.06      # Example: 6% expected return for Asset B
+
+# Calculate and display optimal weights and expected return of portfolio
+optimal_portfolio <- calculate_optimal_weights(volatility_A, volatility_B, correlation, expected_return_A, expected_return_B)
