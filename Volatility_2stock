@@ -1,0 +1,24 @@
+# Function to calculate portfolio volatility for a 2-stock portfolio given volatilities, weights, and correlation
+calculate_portfolio_volatility_2stocks <- function(volatility_A, volatility_B, weight_A, weight_B, correlation) {
+  # Calculate portfolio variance
+  portfolio_variance <- (weight_A^2 * volatility_A^2) +
+                        (weight_B^2 * volatility_B^2) +
+                        (2 * weight_A * weight_B * volatility_A * volatility_B * correlation)
+  
+  # Calculate portfolio volatility (standard deviation)
+  portfolio_volatility <- sqrt(portfolio_variance)
+  
+  # Return portfolio volatility
+  return(portfolio_volatility)
+}
+
+# Example Inputs
+volatility_A <- X         # Volatility of Stock A (e.g., 50%)
+volatility_B <- X         # Volatility of Stock B (e.g., 30%)
+weight_A <- X             # Weight of Stock A in the portfolio (e.g., 60%)
+weight_B <- X             # Weight of Stock B in the portfolio (e.g., 40%)
+correlation <- X          # Correlation between Stock A and Stock B (e.g., 20%)
+
+# Calculate and print portfolio volatility
+portfolio_volatility <- calculate_portfolio_volatility_2stocks(volatility_A, volatility_B, weight_A, weight_B, correlation)
+cat("Portfolio Volatility:", round(portfolio_volatility, 4), "\n")
