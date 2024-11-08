@@ -1,0 +1,16 @@
+# Define the stock returns for the last four years
+returns <- c(-4, 28, 12, 4) / 100  # Convert percentage returns to decimal form
+
+# Calculate the average (mean) annual return
+average_return <- mean(returns)
+
+# Calculate the variance of the stock's returns
+variance <- sum((returns - average_return)^2) / (length(returns) - 1)  # Sample variance
+
+# Calculate the standard deviation of the stock's returns
+standard_deviation <- sqrt(variance)
+
+# Display the results
+cat("Average Annual Return:", round(average_return * 100, 2), "%\n")
+cat("Variance of Returns:", round(variance, 5), "\n")
+cat("Standard Deviation of Returns:", round(standard_deviation * 100, 2), "%\n")
