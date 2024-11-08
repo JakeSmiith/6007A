@@ -1,0 +1,31 @@
+# Define initial investment and allocations
+total_investment <- 200000
+allocation_a <- 0.5    # 50% of total investment
+allocation_b <- 0.25   # 25% of total investment
+allocation_c <- 0.25   # 25% of total investment
+
+# Initial stock prices
+price_a_initial <- 25
+price_b_initial <- 80
+price_c_initial <- 2
+
+# New stock prices after change
+price_a_new <- 30
+price_b_new <- 60
+price_c_new <- 3
+
+# Calculate the number of shares initially purchased for each stock
+shares_a <- (total_investment * allocation_a) / price_a_initial
+shares_b <- (total_investment * allocation_b) / price_b_initial
+shares_c <- (total_investment * allocation_c) / price_c_initial
+
+# Calculate the new value of each stock position
+new_value_a <- shares_a * price_a_new
+new_value_b <- shares_b * price_b_new
+new_value_c <- shares_c * price_c_new
+
+# Calculate the total new value of the portfolio
+new_portfolio_value <- new_value_a + new_value_b + new_value_c
+
+# Display the result
+cat("New Value of the Portfolio:", round(new_portfolio_value, 2), "\n")
