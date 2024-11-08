@@ -1,0 +1,29 @@
+# Define inputs
+initial_cash <- x            # Initial cash amount
+borrowed_amount <- x          # Amount borrowed
+risk_free_rate <- x            # Risk-free interest rate (4%)
+expected_return_j <- x         # Expected return of Portfolio J (15%)
+volatility_j <- x              # Volatility (standard deviation) of Portfolio J (25%)
+portfolio_increase <- x        # Realized increase in Portfolio J (for part b)
+
+# Calculate leverage factor X
+total_investment <- initial_cash + borrowed_amount
+leverage_factor <- total_investment / initial_cash
+
+# Part (a): Calculate expected return and volatility of the leveraged investment
+
+# Expected return of the leveraged investment
+expected_return_leveraged <- risk_free_rate + leverage_factor * (expected_return_j - risk_free_rate)
+
+# Volatility of the leveraged investment
+volatility_leveraged <- leverage_factor * volatility_j
+
+# Display results for part (a)
+cat("Expected Return of the Leveraged Investment:", round(expected_return_leveraged * 100, 2), "%\n")
+cat("Volatility of the Leveraged Investment:", round(volatility_leveraged * 100, 2), "%\n\n")
+
+# Part (b): Calculate realized return if Portfolio J goes up by 25%
+realized_return <- (total_investment * (1 + portfolio_increase) - borrowed_amount * (1 + risk_free_rate)) / initial_cash - 1
+
+# Display result for part (b)
+cat("Realized Return if Portfolio J goes up by x%:", round(realized_return * 100, 2), "%\n")
