@@ -1,0 +1,28 @@
+# Given data
+prob_15 <- 0.6    # Probability of a 15% return
+prob_neg10 <- 0.4 # Probability of a -10% return
+return_15 <- 0.15 # 15% return in decimal form
+return_neg10 <- -0.10 # -10% return in decimal form
+n_firms <- 20     # Number of firms
+
+# Calculate the expected return
+expected_return <- (return_15 * prob_15) + (return_neg10 * prob_neg10)
+
+# Calculate the variance based on probabilities
+variance <- ((return_15 - expected_return)^2 * prob_15) + 
+            ((return_neg10 - expected_return)^2 * prob_neg10)
+
+# Calculate the standard deviation for a single firm
+single_firm_sd <- sqrt(variance)
+
+# Calculate portfolio standard deviation for Type S firms (no diversification benefit)
+portfolio_sd_type_s <- single_firm_sd
+
+# Calculate portfolio standard deviation for Type I firms (with diversification benefit)
+portfolio_sd_type_i <- single_firm_sd / sqrt(n_firms)
+
+# Display the results
+cat("Expected Return:", round(expected_return * 100, 2), "%\n")
+cat("Single Firm Standard Deviation:", round(single_firm_sd * 100, 2), "%\n")
+cat("Portfolio Standard Deviation (Type S - No Diversification):", round(portfolio_sd_type_s * 100, 2), "%\n")
+cat("Portfolio Standard Deviation (Type I - Diversification Benefit):", round(portfolio_sd_type_i * 100, 2), "%\n")
