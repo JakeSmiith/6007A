@@ -1,0 +1,34 @@
+# Function to calculate historical alpha for a stock given excess returns and beta
+calculate_historical_alpha <- function(market_excess_returns, xyz_excess_returns) {
+  
+  # Calculate the average excess returns for the market and XYZ
+  avg_market_excess_return <- mean(market_excess_returns)
+  avg_xyz_excess_return <- mean(xyz_excess_returns)
+  
+  # Calculate the variance of the market's excess returns
+  market_variance <- sum((market_excess_returns - avg_market_excess_return)^2) / (length(market_excess_returns) - 1)
+  
+  # Calculate the covariance between XYZ and the market's excess returns
+  covariance_xyz_market <- sum((xyz_excess_returns - avg_xyz_excess_return) * (market_excess_returns - avg_market_excess_return)) / (length(market_excess_returns) - 1)
+  
+  # Calculate beta for XYZ
+  beta_xyz <- covariance_xyz_market / market_variance
+  
+  # Calculate historical alpha for XYZ
+  historical_alpha <- avg_xyz_excess_return - (beta_xyz * avg_market_excess_return)
+  
+  # Display results
+  cat("Average Excess Return of XYZ:", avg_xyz_excess_return, "%\n")
+  cat("Average Excess Return of Market:", avg_market_excess_return, "%\n")
+  cat("Beta for XYZ:", beta_xyz, "\n")
+  cat("Historical Alpha for XYZ:", historical_alpha, "%\n")
+  
+  return(list(beta = beta_xyz, alpha = historical_alpha))
+}
+
+# Example usage with sample data (you can replace these values with any other numbers)
+market_excess_returns <- c(3, -38)  # Example market excess returns
+xyz_excess_returns <- c(7, -46)     # Example XYZ excess returns
+
+# Calculate historical alpha
+result <- calculate_historical_alpha(market_excess_returns, xyz_excess_returns)
