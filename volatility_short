@@ -1,0 +1,19 @@
+# Define the input parameters
+investments <- c(Intel = 10000, CocaCola = -5000)  # Long $30,000 in Intel, short $10,000 in Coca-Cola
+total_portfolio_value <- 5000  # Total portfolio value
+volatilities <- c(Intel = 0.10, CocaCola = 0.22)  # Intel: 10%, Coca-Cola: 25%
+correlation <- 0.5  # Correlation between Intel and Coca-Cola
+
+# Calculate portfolio weights
+weights <- investments / total_portfolio_value
+
+# Calculate portfolio variance
+portfolio_variance <- (weights["Intel"]^2 * volatilities["Intel"]^2) +
+    (weights["CocaCola"]^2 * volatilities["CocaCola"]^2) +
+    (2 * weights["Intel"] * weights["CocaCola"] * volatilities["Intel"] * volatilities["CocaCola"] * correlation)
+
+# Calculate portfolio volatility
+portfolio_volatility <- sqrt(portfolio_variance)
+
+# Output portfolio volatility as a percentage
+cat("Portfolio Volatility:", round(portfolio_volatility * 100, 2), "%\n")
