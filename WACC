@@ -1,0 +1,32 @@
+# Function to calculate WACC
+calculate_WACC <- function(equity_value, debt_value, cost_of_equity, cost_of_debt, tax_rate) {
+  # Calculate total capital (equity + debt)
+  total_capital <- equity_value + debt_value
+  
+  # Calculate weight of equity and weight of debt
+  weight_equity <- equity_value / total_capital
+  weight_debt <- debt_value / total_capital
+  
+  # Calculate after-tax cost of debt
+  after_tax_cost_of_debt <- cost_of_debt * (1 - tax_rate)
+  
+  # Calculate WACC
+  WACC <- (weight_equity * cost_of_equity) + (weight_debt * after_tax_cost_of_debt)
+  
+  # Return the result
+  return(WACC)
+}
+
+# Example inputs
+equity_value <- 400          # Equity value in millions (e.g., $400 million)
+debt_value <- 100            # Debt value in millions (e.g., $100 million)
+cost_of_equity <- 0.15       # Cost of equity (e.g., 15% as 0.15)
+cost_of_debt <- 0.08         # Pre-tax cost of debt (e.g., 8% as 0.08)
+tax_rate <- 0.40             # Corporate tax rate (e.g., 40% as 0.40)
+
+# Calculate WACC
+WACC <- calculate_WACC(equity_value, debt_value, cost_of_equity, cost_of_debt, tax_rate)
+WACC_percent <- WACC * 100  # Convert to percentage
+
+# Print the result
+cat("The Weighted Average Cost of Capital (WACC) is:", round(WACC_percent, 2), "%\n")
