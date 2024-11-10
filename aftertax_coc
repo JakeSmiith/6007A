@@ -1,0 +1,19 @@
+# Function to calculate the after-tax cost of debt
+calculate_after_tax_cost_of_debt <- function(debt_cost, tax_rate) {
+  # Calculate the after-tax cost of debt
+  after_tax_cost_of_debt <- debt_cost * (1 - tax_rate)
+  
+  # Return the result
+  return(after_tax_cost_of_debt)
+}
+
+# Example inputs
+debt_cost <- 0.08    # Cost of debt (e.g., 8% as 0.08)
+tax_rate <- 0.40     # Corporate tax rate (e.g., 40% as 0.40)
+
+# Calculate the after-tax cost of debt
+Rd_after_tax <- calculate_after_tax_cost_of_debt(debt_cost, tax_rate)
+Rd_after_tax_percent <- Rd_after_tax * 100  # Convert to percentage
+
+# Print the result
+cat("The After-Tax Cost of Debt is:", round(Rd_after_tax_percent, 2), "%\n")
