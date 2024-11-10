@@ -1,0 +1,40 @@
+# Function to calculate Enterprise Value (EV)
+calculate_EV <- function(equity_value, total_debt, cash_equivalents) {
+  EV <- equity_value + total_debt - cash_equivalents
+  return(EV)
+}
+
+# Function to calculate Unlevered Beta (Beta_u)
+calculate_unlevered_beta <- function(equity_value, total_debt, cash_equivalents, equity_beta, debt_beta = 0) {
+  # Calculate Enterprise Value
+  EV <- calculate_EV(equity_value, total_debt, cash_equivalents)
+  
+  # Net Debt
+  net_debt <- total_debt - cash_equivalents
+  
+  # Unlevered Beta formula: Beta_u = (E / (E + D)) * Equity Beta + (D / (E + D)) * Debt Beta
+  # Where E is equity value and D is net debt
+  beta_unlevered <- (equity_value / EV) * equity_beta + (net_debt / EV) * debt_beta
+  return(beta_unlevered)
+}
+
+# Example usage:
+
+# Inputs for Enterprise Value calculation
+equity_value <- 101       # Equity value in billions (e.g., $101 billion)
+total_debt <- 16          # Total debt in billions (e.g., $16 billion)
+cash_equivalents <- 48    # Cash and short-term investments in billions (e.g., $48 billion)
+
+# Calculate Enterprise Value
+EV <- calculate_EV(equity_value, total_debt, cash_equivalents)
+cat("Enterprise Value (EV):", EV, "billion\n")
+
+# Inputs for Unlevered Beta calculation
+equity_beta <- 1.23       # Given Equity Beta
+debt_beta <- 0            # Debt Beta (assumed zero in this case)
+
+# Calculate Unlevered Beta
+unlevered_beta <- calculate_unlevered_beta(equity_value, total_debt, cash_equivalents, equity_beta, debt_beta)
+cat("Unlevered Beta:", unlevered_beta, "\n")
+
+# This script allows for multiple use cases by adjusting the inputs above.
