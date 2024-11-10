@@ -7,35 +7,35 @@ calculate_risk_premiums <- function(mkt_rf, smb, hml, pr1yr, beta_mkt, beta_smb,
     # Annualize the Monthly Risk Premium
     annual_risk_premium <- monthly_risk_premium * 12
     
-    # Calculate CAPM-based Risk Premium (using only the CAPM beta and market factor, annualized)
-    capm_risk_premium <- (capm_beta * mkt_rf) * 12
+    # Calculate CAPM-based Cost of Capital with given formula
+    capm_cost_of_capital <- (capm_beta * mkt_rf * 12) + risk_free_rate
     
-    # Calculate Cost of Capital
+    # Calculate Cost of Capital using FFC Model
     cost_of_capital <- annual_risk_premium + risk_free_rate
     
     # Return the results as a list
     return(list(
         Monthly_Risk_Premium = monthly_risk_premium,
         Annual_Risk_Premium = annual_risk_premium,
-        CAPM_Risk_Premium = capm_risk_premium,
+        CAPM_Cost_of_Capital = capm_cost_of_capital,
         Cost_of_Capital = cost_of_capital
     ))
 }
 
-# Example inputs
+# Example inputs based on MSFT data from the image
 mkt_rf <- 0.61    # Market Risk Premium (monthly)
 smb <- 0.25       # Size Premium (monthly)
 hml <- 0.38       # Value Premium (monthly)
 pr1yr <- 0.70     # Momentum Premium (monthly)
 
-# Factor betas for a stock (e.g., XOM)
-beta_mkt <- 0.808  # Beta for Market factor
-beta_smb <- -0.812 # Beta for Size factor
-beta_hml <- 0.196  # Beta for Value factor
-beta_pr1yr <- 0.376 # Beta for Momentum factor
+# Factor betas for Microsoft (MSFT)
+beta_mkt <- 0.965  # Beta for Market factor
+beta_smb <- -0.295 # Beta for Size factor
+beta_hml <- -0.099 # Beta for Value factor
+beta_pr1yr <- 0.089 # Beta for Momentum factor
 
-# CAPM beta specifically for CAPM risk premium calculation
-capm_beta <- 0.808  # CAPM beta for the stock
+# CAPM beta specifically for CAPM cost of capital calculation
+capm_beta <- 0.84  # CAPM beta for MSFT
 
 # Risk-free rate (annualized)
 risk_free_rate <- 3.00  # Risk-free rate in %
