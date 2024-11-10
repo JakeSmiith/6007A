@@ -1,0 +1,35 @@
+# Define a function to calculate CAPM required return and alpha
+calculate_alpha <- function(expected_return, volatility, beta, market_return, risk_free_rate) {
+  # Calculate the CAPM required return
+  required_return <- risk_free_rate + beta * (market_return - risk_free_rate)
+  
+  # Calculate alpha
+  alpha <- expected_return - required_return
+  
+  return(data.frame(Expected_Return = expected_return, Volatility = volatility, 
+                    Beta = beta, Required_Return = required_return, Alpha = alpha))
+}
+
+# Define the inputs
+market_return <- 0.07   # Market expected return (7%)
+risk_free_rate <- 0.03  # Risk-free rate (3%)
+
+# Create a data frame with stock data (example values)
+stock_data <- data.frame(
+  Stock = c("Green Leaf", "NatSam", "HanBel", "Rebecca Automobile"),
+  Expected_Return = c(0.12, 0.10, 0.09, 0.06),
+  Volatility = c(0.20, 0.40, 0.30, 0.35),
+  Beta = c(1.5, 1.8, 0.75, 1.2)
+)
+
+# Apply the function to each row in the stock_data data frame
+results <- do.call(rbind, lapply(1:nrow(stock_data), function(i) {
+  calculate_alpha(stock_data$Expected_Return[i], stock_data$Volatility[i], 
+                  stock_data$Beta[i], market_return, risk_free_rate)
+}))
+
+# Add stock names to the results
+results <- cbind(Stock = stock_data$Stock, results)
+
+# Print results
+print(results)
