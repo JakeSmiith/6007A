@@ -1,0 +1,22 @@
+# Function to calculate required return using CAPM and probability of default
+calculate_default_probability <- function(ytm, rf, beta, market_risk_premium, loss_rate) {
+    # Calculate Required Return using CAPM formula
+    required_return <- rf + (beta * market_risk_premium)
+    
+    # Calculate Probability of Default
+    probability_of_default <- (ytm - required_return) / loss_rate
+    
+    # Display results
+    cat("Required Return (CAPM):", round(required_return * 100, 2), "%\n")
+    cat("Probability of Default:", round(probability_of_default * 100, 2), "%\n")
+}
+
+# Example default values
+ytm <- 0.083     # Yield to Maturity, e.g., 8.3%
+rf <- 0.01       # Risk-Free Rate, e.g., 1%
+beta <- 0.31     # Beta, given in the example
+market_risk_premium <- 0.05 # Market Risk Premium, e.g., 5%
+loss_rate <- 0.60  # Loss Rate, e.g., 60%
+
+# Run the calculation with the example values
+calculate_default_probability(ytm, rf, beta, market_risk_premium, loss_rate)
