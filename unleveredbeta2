@@ -1,0 +1,30 @@
+# Function to calculate the Equity Cost of Capital (Re) and Unlevered Cost of Capital (Ru)
+
+calculate_cost_of_capital <- function(risk_free_rate, beta_equity, market_return, equity_value, debt_value, debt_yield) {
+  
+  # Calculate Equity Cost of Capital using CAPM
+  equity_cost_of_capital <- risk_free_rate + beta_equity * (market_return - risk_free_rate)
+  
+  # Calculate Unlevered Cost of Capital
+  total_firm_value <- equity_value + debt_value
+  unlevered_cost_of_capital <- (equity_value / total_firm_value) * equity_cost_of_capital + 
+                               (debt_value / total_firm_value) * debt_yield
+  
+  # Display the results
+  cat("Equity Cost of Capital (Re):", round(equity_cost_of_capital * 100, 2), "%\n")
+  cat("Unlevered Cost of Capital (Ru):", round(unlevered_cost_of_capital * 100, 2), "%\n")
+  
+  # Return values as a list
+  return(list(Equity_Cost_of_Capital = equity_cost_of_capital, Unlevered_Cost_of_Capital = unlevered_cost_of_capital))
+}
+
+# Example Inputs
+risk_free_rate <- 0.04          # 4%
+beta_equity <- 1.0              # Given beta for Thurbinar
+market_return <- 0.09           # 9% (market return)
+equity_value <- 300             # Equity value in million (e.g., 300 million)
+debt_value <- 100               # Debt value in million (e.g., 100 million)
+debt_yield <- 0.045             # 4.5% debt yield
+
+# Run the function with the example inputs
+calculate_cost_of_capital(risk_free_rate, beta_equity, market_return, equity_value, debt_value, debt_yield)
