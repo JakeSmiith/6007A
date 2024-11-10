@@ -1,0 +1,40 @@
+# Function to calculate CAPM expected return based on excess returns
+calculate_CAPM_expected_return <- function(market_excess_returns, asset_excess_returns, risk_free_rate, expected_market_return) {
+  
+  # Calculate the average excess returns for the market and the asset
+  avg_market_excess_return <- mean(market_excess_returns)
+  avg_asset_excess_return <- mean(asset_excess_returns)
+  
+  # Calculate the variance of the market's excess returns
+  market_variance <- var(market_excess_returns)
+  
+  # Calculate the covariance between asset and market's excess returns
+  covariance_asset_market <- cov(asset_excess_returns, market_excess_returns)
+  
+  # Calculate beta for the asset
+  beta_asset <- covariance_asset_market / market_variance
+  
+  # Calculate the market risk premium
+  market_risk_premium <- expected_market_return - risk_free_rate
+  
+  # Calculate the expected return for the asset using CAPM
+  expected_return_asset <- risk_free_rate + beta_asset * market_risk_premium
+  
+  # Display results
+  cat("Average Excess Return of Market:", avg_market_excess_return, "%\n")
+  cat("Average Excess Return of Asset:", avg_asset_excess_return, "%\n")
+  cat("Beta for Asset:", beta_asset, "\n")
+  cat("Market Risk Premium:", market_risk_premium, "%\n")
+  cat("Expected Return for Asset (CAPM):", expected_return_asset, "%\n")
+  
+  return(expected_return_asset)
+}
+
+# Example usage with sample data (you can replace these with values from other questions)
+market_excess_returns <- c(3, -38)  # Replace with market excess returns (in %)
+asset_excess_returns <- c(7, -46)   # Replace with asset's excess returns (in %)
+risk_free_rate <- 3                 # Replace with the risk-free rate (in %)
+expected_market_return <- 8         # Replace with the expected market return (in %)
+
+# Calculate the CAPM expected return for the asset
+capm_expected_return <- calculate_CAPM_expected_return(market_excess_returns, asset_excess_returns, risk_free_rate, expected_market_return)
