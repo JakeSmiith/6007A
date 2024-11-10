@@ -1,0 +1,27 @@
+# Function to calculate annual probability of default
+calculate_default_probability <- function(risk_free_rate, market_risk_premium, beta, ytm, loss_rate) {
+  # Step 1: Calculate the expected return without default (credit spread)
+  required_return <- risk_free_rate + beta * market_risk_premium
+  
+  # Step 2: Solve for the probability of default
+  # Rearranged formula: p = (ytm - required_return) / loss_rate
+  probability_default <- (ytm - required_return) / loss_rate
+  
+  # Display the results
+  cat("Required Return Without Default:", round(required_return * 100, 2), "%\n")
+  cat("Yield to Maturity:", round(ytm * 100, 2), "%\n")
+  cat("Estimated Probability of Default:", round(probability_default * 100, 2), "%\n")
+  
+  return(probability_default)
+}
+
+# Example Usage:
+# Input parameters
+risk_free_rate <- 0.03        # Example: 3% risk-free rate
+market_risk_premium <- 0.05   # Example: 5% market risk premium
+beta <- 0.31                  # Example: 0.31 beta for the bond
+ytm <- 0.173                  # Example: 17.3% yield to maturity
+loss_rate <- 0.60             # Example: 60% expected loss rate in default
+
+# Calculate probability of default
+default_probability <- calculate_default_probability(risk_free_rate, market_risk_premium, beta, ytm, loss_rate)
