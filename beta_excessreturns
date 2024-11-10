@@ -1,0 +1,21 @@
+# Define the excess returns for the market and XYZ
+market_excess_returns <- c(3, -38)  # Market excess returns in percentage points
+xyz_excess_returns <- c(7, -46)     # XYZ excess returns in percentage points
+
+# Calculate the average excess returns for the market and XYZ
+avg_market_excess_return <- mean(market_excess_returns)
+avg_xyz_excess_return <- mean(xyz_excess_returns)
+
+# Calculate the variance of the market's excess returns
+market_variance <- sum((market_excess_returns - avg_market_excess_return)^2) / (length(market_excess_returns) - 1)
+
+# Calculate the covariance between XYZ and the market's excess returns
+covariance_xyz_market <- sum((xyz_excess_returns - avg_xyz_excess_return) * (market_excess_returns - avg_market_excess_return)) / (length(market_excess_returns) - 1)
+
+# Calculate beta for XYZ
+beta_xyz <- covariance_xyz_market / market_variance
+
+# Display results
+cat("Variance of Market's Excess Returns:", market_variance, "%\n")
+cat("Covariance between XYZ and Market's Excess Returns:", covariance_xyz_market, "%\n")
+cat("Beta for XYZ:", beta_xyz, "\n")
