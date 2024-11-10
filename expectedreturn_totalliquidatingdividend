@@ -1,0 +1,19 @@
+# Define data for each stock
+market_cap <- c(800, 750, 950, 900)  # Market Capitalization in millions
+total_liquidating_dividend <- rep(1000, 4)  # Total Liquidating Dividend in millions
+beta <- c(0.77, 1.46, 1.25, 1.07)  # Beta for each stock
+
+# Calculate expected return
+expected_return <- (total_liquidating_dividend - market_cap) / market_cap
+
+# Create a data frame for results
+stocks <- data.frame(
+  Stock = c("Stock A", "Stock B", "Stock C", "Stock D"),
+  Market_Cap = market_cap,
+  Total_Liquidating_Dividend = total_liquidating_dividend,
+  Beta = beta,
+  Expected_Return = expected_return
+)
+
+# Print the data frame
+print(stocks)
