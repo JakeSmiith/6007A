@@ -1,0 +1,26 @@
+# Function to calculate the unlevered cost of capital (Ru)
+calculate_unlevered_cost_of_capital <- function(equity_value, debt_value, equity_cost, debt_cost) {
+  # Calculate the weights of equity and debt
+  total_value <- equity_value + debt_value
+  equity_weight <- equity_value / total_value
+  debt_weight <- debt_value / total_value
+  
+  # Calculate the unlevered cost of capital
+  unlevered_cost_of_capital <- (equity_weight * equity_cost) + (debt_weight * debt_cost)
+  
+  # Return the result
+  return(unlevered_cost_of_capital)
+}
+
+# Example inputs
+equity_value <- 400      # in million dollars
+debt_value <- 100        # in million dollars
+equity_cost <- 0.15      # 15% equity cost
+debt_cost <- 0.08        # 8% debt cost
+
+# Calculate the unlevered cost of capital
+Ru <- calculate_unlevered_cost_of_capital(equity_value, debt_value, equity_cost, debt_cost)
+Ru_percent <- Ru * 100  # Convert to percentage
+
+# Print the result
+cat("The Unlevered Cost of Capital (Ru) is:", round(Ru_percent, 2), "%\n")
