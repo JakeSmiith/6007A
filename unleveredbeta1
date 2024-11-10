@@ -1,0 +1,30 @@
+# Function to calculate unlevered beta and unlevered cost of capital
+calculate_unlevered_cost_of_capital <- function(stock_price, shares_outstanding, debt_value, equity_beta, debt_beta = 0, risk_free_rate, market_risk_premium) {
+    # Calculate market value of equity
+    equity_value <- stock_price * shares_outstanding
+    
+    # Calculate unlevered beta
+    unlevered_beta <- (equity_value / (equity_value + debt_value)) * equity_beta + 
+        (debt_value / (equity_value + debt_value)) * debt_beta
+    
+    # Calculate unlevered cost of capital using CAPM
+    unlevered_cost_of_capital <- (risk_free_rate + unlevered_beta * market_risk_premium) * 100  # Convert to percentage
+    
+    # Output the results
+    cat("Unlevered Beta:", round(unlevered_beta, 4), "\n")
+    cat("Unlevered Cost of Capital:", round(unlevered_cost_of_capital, 2), "%\n")  # Display as percentage
+    
+    return(list(unlevered_beta = unlevered_beta, unlevered_cost_of_capital = unlevered_cost_of_capital))
+}
+
+# Inputs
+stock_price <- 20                 # Price per share in dollars
+shares_outstanding <- 15e6        # Number of shares outstanding
+debt_value <- 100e6               # Value of debt in dollars
+equity_beta <- 1.00               # Equity beta
+debt_beta <- 0                    # Debt beta (assumed to be zero for risk-free debt)
+risk_free_rate <- 0.04            # Risk-free rate (4%)
+market_risk_premium <- 0.05       # Market risk premium (5%)
+
+# Calculate and display unlevered beta and unlevered cost of capital
+results <- calculate_unlevered_cost_of_capital(stock_price, shares_outstanding, debt_value, equity_beta, debt_beta, risk_free_rate, market_risk_premium)
